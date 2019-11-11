@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.effect.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="779.0" prefWidth="1053.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="basededatos.FXMLDocumentController">
+   <children>
+      <TableView layoutX="18.0" layoutY="231.0" prefHeight="525.0" prefWidth="692.0">
+        <columns>
+          <TableColumn prefWidth="268.0" text="Nombre" />
+            <TableColumn minWidth="6.0" prefWidth="68.0" text="Sexo" />
+            <TableColumn text="Fecha" />
+            <TableColumn prefWidth="275.0" text="Lista de Enfermedades" />
+        </columns>
+      </TableView>
+      <Pane layoutX="7.0" layoutY="14.0" prefHeight="206.0" prefWidth="741.0" style="-fx-background-color: LightGray;">
+         <children>
+            <Button fx:id="IngresarDonador" layoutX="605.0" layoutY="180.0" mnemonicParsing="false" style="-fx-background-color: Orange;" text="Ingresar Donador" />
+            <TextField fx:id="Nombres" layoutX="118.0" layoutY="12.0" promptText="Ej. Ronald Steven" />
+            <TextField fx:id="Apellidos" layoutX="118.0" layoutY="46.0" promptText="Ej. Esquivel " />
+            <Label layoutX="14.0" layoutY="16.0" text="Nombres" />
+            <Label layoutX="14.0" layoutY="50.0" text="Primer Apellido" />
+            <ChoiceBox fx:id="Sexo" layoutX="375.0" layoutY="46.0" prefHeight="25.0" prefWidth="63.0" />
+            <Label layoutX="16.0" layoutY="140.0" text="Fecha de Nacimiento: (AAAA/MM/DD)" />
+            <TextField fx:id="Ano" layoutX="17.0" layoutY="168.0" prefHeight="25.0" prefWidth="57.0" promptText="Año" />
+            <TextField fx:id="Mes" layoutX="73.0" layoutY="168.0" prefHeight="25.0" prefWidth="63.0" promptText="Mes" />
+            <TextField fx:id="Dia" layoutX="136.0" layoutY="168.0" prefHeight="25.0" prefWidth="63.0" promptText="Día" />
+            <Label layoutX="291.0" layoutY="16.0" prefHeight="17.0" prefWidth="95.0" text="Tipo de Sangre" />
+            <TextField fx:id="Cedula" layoutX="118.0" layoutY="109.0" promptText="Ej. 245631278" />
+            <Label layoutX="17.0" layoutY="113.0" text="Cédula" />
+            <Label layoutX="13.0" layoutY="80.0" text="Segundo Apellido" />
+            <TextField fx:id="Apellidos2" layoutX="118.0" layoutY="76.0" promptText="Ej. López" />
+            <ChoiceBox fx:id="TipoSangre" layoutX="375.0" layoutY="12.0" prefHeight="25.0" prefWidth="63.0" />
+            <Label layoutX="319.0" layoutY="50.0" text="Sexo" />
+            <TextField fx:id="Telefono1" layoutX="375.0" layoutY="76.0" prefHeight="25.0" prefWidth="82.0" promptText="Ej. 84253177" />
+            <TextField fx:id="Telefono2" layoutX="375.0" layoutY="101.0" prefHeight="25.0" prefWidth="82.0" promptText="Opcional" />
+            <Label layoutX="303.0" layoutY="80.0" text="Telefono 1" />
+            <Label layoutX="303.0" layoutY="105.0" text="Telefono 2" />
+            <TextField fx:id="Provincia" layoutX="585.0" layoutY="12.0" promptText="Ej. Alajuela" />
+            <TextField fx:id="Canton" layoutX="585.0" layoutY="46.0" promptText="Ej. San Carlos" />
+            <TextField fx:id="Distrito" layoutX="585.0" layoutY="76.0" promptText="Ej. Aguas Zarcas" />
+            <Label layoutX="517.0" layoutY="16.0" prefHeight="17.0" prefWidth="49.0" text="Provincia" />
+            <Label layoutX="517.0" layoutY="50.0" prefHeight="17.0" prefWidth="49.0" text="Cantón" />
+            <Label layoutX="517.0" layoutY="80.0" prefHeight="17.0" prefWidth="49.0" text="Distrito" />
+            <TextField fx:id="Direccion" layoutX="585.0" layoutY="109.0" prefHeight="58.0" prefWidth="149.0" promptText="Ej. Urb. Los Santos, calle 1." />
+            <Label layoutX="517.0" layoutY="132.0" prefHeight="17.0" prefWidth="61.0" text="Dirección" />
+            <Label layoutX="293.0" layoutY="149.0" text="Enfermedades" />
+            <ComboBox layoutX="375.0" layoutY="145.0" prefHeight="25.0" prefWidth="82.0" />
+         </children>
+      </Pane>
+      <Pane layoutX="760.0" layoutY="14.0" prefHeight="105.0" prefWidth="280.0">
+         <children>
+            <TextField fx:id="CedulaExis" layoutX="117.0" layoutY="32.0" prefHeight="25.0" prefWidth="89.0" promptText="Ej. 256945123" />
+            <Label layoutX="56.0" layoutY="36.0" prefHeight="17.0" prefWidth="40.0" text="Cédula" />
+            <Label layoutX="25.0" layoutY="5.0" text="Añadir a usuario ya existente:" />
+            <Label layoutX="25.0" layoutY="74.0" prefHeight="17.0" prefWidth="89.0" text="Cant. de sangre" />
+            <TextField fx:id="Telefono11" layoutX="121.0" layoutY="70.0" prefHeight="25.0" prefWidth="82.0" promptText="Ej. 110ml" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
