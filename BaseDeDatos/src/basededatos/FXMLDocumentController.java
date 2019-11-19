@@ -14,9 +14,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import static javafx.collections.FXCollections.observableArrayList;
@@ -28,7 +30,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  *
@@ -69,12 +74,41 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField Direccion;
     @FXML
-    private TextField CedulaExis;
-    @FXML
     private TextField Cant;
     @FXML
     private TextField CantExis;
+    @FXML
+    private TableView<Persona> Tabla;
+    @FXML
+    private TextField CedulaDon;
+    @FXML
+    private Button IngresarDonacion;
+    @FXML
+    private Button MostrarTodos;
+    @FXML
+    private ComboBox<String> Enfermedades;
+    @FXML
+    private TextField CedulaEnfe;
+    @FXML
+    private ComboBox<String> Gravedad;
+    @FXML
+    private TextField AnoPadecimiento;
+    @FXML
+    private Button IngresarEnfermedad;
+    @FXML
+    private TextField CedulaMedi;
+    @FXML
+    private TextField NombreMedi;
+    @FXML
+    private Button IngresarMedicamento;
+    @FXML
+    private TextField AnoMed;
+    @FXML
+    private ComboBox<String> TipoMedi;
+    @FXML
+    private TextField AnoMedFin;
 
+    ArrayList<Persona> Donadores;
     String insertarUser = "insert into persona values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     String verUser = "select * from persona";
 
@@ -87,7 +121,8 @@ public class FXMLDocumentController implements Initializable {
         try (Connection conn = DriverManager.getConnection(
                 "jdbc:postgresql://localhost:5432/DonacionCR", "postgres", "roniexy50");
                 PreparedStatement ingreso = conn.prepareStatement(insertarUser)) {
-            ingreso.setInt(1, parseInt(Cedula.getText()));//cedulla
+
+            ingreso.setInt(1, parseInt(Cedula.getText()));//cedula
             ingreso.setInt(2, ObtenerDato(Dia));//dia
             ingreso.setString(3, Mes.getValue());//mes
             ingreso.setInt(4, ObtenerDato(Ano));//ano
@@ -104,7 +139,7 @@ public class FXMLDocumentController implements Initializable {
             ingreso.setInt(15, parseInt(Telefono1.getText()));//telefono obligatorio
             ingreso.setInt(16, parseInt(Telefono2.getText()));//telefono opcional
             ingreso.executeUpdate();
-            
+
             if (conn != null) {
                 System.out.println("Donador nuevo ingresado!");
             } else {
@@ -123,17 +158,99 @@ public class FXMLDocumentController implements Initializable {
         return a.getValue();
     }
 
-    private void AnadiraExistente(ActionEvent event) {
-        System.out.println("You clicked me!");
+    private void MostrarTodos() {
+        Donadores = null;
+        Donadores = new ArrayList<>();
+        Statement stmt = null;
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(
+                    "jdbc:postgresql://localhost:5432/DonacionCR", "postgres", "roniexy50");
+            stmt = conn.createStatement();
+            ResultSet mostrar = stmt.executeQuery(verUser);
+            while (mostrar.next()) {
+                int cedula = mostrar.getInt("cedula");
+                String name = mostrar.getString("nombre");
+                String apellidos = mostrar.getString("apellido");
+                String apellidos2 = mostrar.getString("apelido2");
+                int dia = mostrar.getInt("dia");
+                String mes = mostrar.getString("mes");
+                int ano = mostrar.getInt("ano");
+                String sexo = mostrar.getString("sexo");
+                String direccion = mostrar.getString("direccion");
+                String distrito = mostrar.getString("distrito");
+                String canton = mostrar.getString("canton");
+                String provincia = mostrar.getString("provincia");
+                String tipo_sangre = mostrar.getString("tipo_sangre");
+                int total_sangre = mostrar.getInt("total_sangre");
+                int telefono1 = mostrar.getInt("telefono1");
+                int telefono2 = mostrar.getInt("telefono2");
+                Persona nueva=new Persona(cedula,name,apellidos,apellidos2,sexo,provincia,canton,distrito,direccion,dia,mes,ano,tipo_sangre,total_sangre,telefono1,telefono2);
+                Donadores.add(nueva);
 
+            }
+            mostrar.close();
+            stmt.close();
+
+            if (conn != null) {
+                System.out.println("Se muestran todos los donadores con exito!");
+            } else {
+                System.out.println("Fallo a la hora de ingresar nuevo donador!");
+            }
+
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    public void AgregarOrdenAlfa(ActionEvent event) {
+        Tabla.getColumns().clear();
+        MostrarTodos();
+        ObservableList<Persona> Don = FXCollections.observableArrayList();
+        for (int i = 0 ; i<Donadores.size();i++) {
+            Don.add(Donadores.get(i));
+        }
+        Tabla.setItems(Don);
+        TableColumn<Persona, String> colApe1 = new TableColumn<>("Apellido");
+        colApe1.setCellValueFactory(new PropertyValueFactory<Persona, String>("Apellido1"));
+        colApe1.setMinWidth(Tabla.getMaxWidth() / 4);
+
+        TableColumn<Persona, String> colApe2 = new TableColumn<>("2ndo Apellido");
+        colApe2.setCellValueFactory(new PropertyValueFactory<Persona, String>("Apellido2"));
+        colApe2.setMinWidth(Tabla.getMaxWidth() / 4);
+
+        TableColumn<Persona, String> Name = new TableColumn<>("Nombre");
+        Name.setCellValueFactory(new PropertyValueFactory<Persona, String>("Nombres"));
+        Name.setMinWidth(Tabla.getMaxWidth() / 4);
+
+        TableColumn<Persona, String> Ced = new TableColumn<>("Cedula");
+        Ced.setCellValueFactory(new PropertyValueFactory<Persona, String>("Cedula"));
+        Ced.setMinWidth(Tabla.getMaxWidth() / 4);
+
+        Tabla.getColumns().addAll(colApe1, colApe2, Name, Ced);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Sexo.setItems(observableArrayList(
                 "Hombre", "Mujer"));
+        Sexo.setValue("Hombre");
+        Enfermedades.setItems(observableArrayList(
+                "Diabetes", "Hipertensión", "Cirrosis", "Cancer", "Anemia"));
+        Enfermedades.setValue("Diabetes");
+        Gravedad.setItems(observableArrayList(
+                "Leve", "Media", "Grave"));
+        Gravedad.setValue("Leve");
+        TipoMedi.setItems(observableArrayList(
+                " Antiinflamatorios", "Analgésicos", "Antiinfecciosos", "Antialérgicos", "Antiácidos"));
+        TipoMedi.setValue("Analgésicos");
         TipoSangre.setItems(observableArrayList(
                 "O+", "O-", "A+", "A-", "AB+", "AB-", "B+", "B-"));
+        TipoSangre.setValue("AB+");
         Ano.setItems(Anos());
         Ano.setValue(2001);
         Dia.setItems(Dias());
