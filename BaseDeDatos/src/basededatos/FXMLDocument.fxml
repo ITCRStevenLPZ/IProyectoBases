@@ -58,7 +58,7 @@
                   <Font size="11.5" />
                </font></Label>
             <TextField fx:id="NombreMedi" layoutX="131.0" layoutY="116.0" prefHeight="42.0" prefWidth="142.0" promptText="Ej. Citromax , Enanthium" />
-            <Button fx:id="IngresarMedicamento" defaultButton="true" layoutX="128.0" layoutY="282.0" mnemonicParsing="false" onAction="#AnadirNuevo" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: pink;" text="Ingresar Medicamento" underline="true" />
+            <Button fx:id="IngresarMedicamento" defaultButton="true" layoutX="128.0" layoutY="282.0" mnemonicParsing="false" onAction="#AnadirMedi" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: pink;" text="Ingresar Medicamento" underline="true" />
             <TextField fx:id="AnoMed" layoutX="133.0" layoutY="185.0" prefHeight="25.0" prefWidth="82.0" promptText="Ej. 2000" />
             <ComboBox fx:id="TipoMedi" layoutX="128.0" layoutY="71.0" prefHeight="25.0" prefWidth="113.0" />
             <Label layoutX="58.0" layoutY="75.0" prefHeight="17.0" prefWidth="30.0" text="Tipo*" />
@@ -80,7 +80,7 @@
             <Label layoutX="4.0" layoutY="5.0" prefHeight="17.0" prefWidth="210.0" text="Insertar una enfermedad/padecimiento" />
             <TextField fx:id="AnoPadecimiento" layoutX="145.0" layoutY="149.0" prefHeight="25.0" prefWidth="82.0" promptText="Ej. 2018" />
             <Label layoutX="9.0" layoutY="153.0" text="Año de padecimiento*" />
-            <Button fx:id="IngresarEnfermedad" defaultButton="true" layoutX="140.0" layoutY="204.0" mnemonicParsing="false" onAction="#AnadirNuevo" style="-fx-background-color: pink;" text="Ingresar Enfermedad" textAlignment="CENTER" underline="true" />
+            <Button fx:id="IngresarEnfermedad" defaultButton="true" layoutX="140.0" layoutY="204.0" mnemonicParsing="false" onAction="#AnadirEnfermedad" style="-fx-background-color: pink;" text="Ingresar Enfermedad" textAlignment="CENTER" underline="true" />
             <Label layoutX="7.0" layoutY="229.0" prefHeight="17.0" prefWidth="210.0" text="*Campos Obligatorios" />
          </children>
       </Pane>
@@ -91,8 +91,9 @@
             <Label layoutX="8.0" layoutY="6.0" prefHeight="17.0" prefWidth="155.0" text="Añadir donación a donante" />
             <Label layoutX="16.0" layoutY="66.0" prefHeight="17.0" prefWidth="89.0" text="Cant. de sangre" />
             <TextField fx:id="CantExis" layoutX="122.0" layoutY="62.0" prefHeight="25.0" prefWidth="82.0" promptText="Ej. 110ml" />
-            <Button fx:id="IngresarDonacion" defaultButton="true" layoutX="151.0" layoutY="118.0" mnemonicParsing="false" onAction="#AnadirNuevo" style="-fx-background-color: pink;" text="Ingresar Donación" underline="true" />
+            <Button fx:id="IngresarDonacion" defaultButton="true" layoutX="151.0" layoutY="118.0" mnemonicParsing="false" onAction="#AnadirDonacion" style="-fx-background-color: pink;" text="Ingresar Donación" underline="true" />
          </children>
       </Pane>
+      <Button fx:id="PomedioSangre" defaultButton="true" layoutX="160.0" layoutY="745.0" mnemonicParsing="false" onAction="#AgregarPromSangre" style="-fx-background-color: pink;" text="Total Sangre por persona" underline="true" />
    </children>
 </AnchorPane>

@@ -1,10 +1,12 @@
 package basededatos;
 
+import java.util.ArrayList;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Persona {
-
+    boolean diabetes;
+    ArrayList<Enfermedad> enfermedades;
     SimpleIntegerProperty Cedula;
     SimpleStringProperty Nombres;
     SimpleStringProperty Apellido1;
@@ -47,6 +49,7 @@ public class Persona {
         this.Cant_Sangre = new SimpleIntegerProperty(Cant_Sangre);
         this.Telefono1 = new SimpleIntegerProperty(Telefono1);
         this.Telefono2 = new SimpleIntegerProperty(Telefono2);
+        this.diabetes=false;
     }
 
     public String getNombres() {
